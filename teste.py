@@ -17,12 +17,26 @@ def get_telemetry_data():
 while True:
     telemetry_data = get_telemetry_data()
     if telemetry_data:
-        # Acessando os dados específicos de RPM e velocidade (km/h)
         truck_data = telemetry_data.get('truck', {})
-        rpm = truck_data.get('engineRpm')
-        speed = truck_data.get('speed', 0.0)  # Convertendo de m/s para km/h
-        
-        print(f"RPM: {rpm}, Velocidade: {speed:.2f} km/h")
-    
-    # Aguarde um pouco antes de fazer a próxima leitura
+        truck_data1 = telemetry_data.get('navigation', {})
+        rpm = truck_data.get('engineRpm') # RPM
+        speed = truck_data.get('speed')   # Velocidade em Km/h
+        odometer = truck_data.get('odometer')  # Odometro
+        gear = truck_data.get('gear')     # Marcha
+        fuel = truck_data.get('fuel')     # Nivel de Combustivel
+        fuelCapacity = truck_data.get('fuelCapacity') # Capacidade max do Combustivel
+        brakeTemperature = truck_data.get('brakeTemperature') # Temperatura do Freio
+        airPressure = truck_data.get('airPressure') #Pressão no tanque de ar do freio em psi
+        oilTemperature = truck_data.get('oilTemperature') # Temperatura do óleo em graus Celsius
+        oilPressure = truck_data.get('oilPressure') # Pressão do óleo em psi
+        waterTemperature = truck_data.get('waterTemperature') # Temperatura da água em graus Celsius
+        batteryVoltage = truck_data.get('batteryVoltage') # Voltagem da bateria em volts
+        speedLimit = truck_data1.get('speedLimit') # Valor atual do "limite de velocidade do Route Advisor" em km/h
+
+        print(f'''
+              RPM: {rpm} 
+              Velocidade: {speed:.2f} km/h 
+              Marcha: {gear} 
+              Radar: {speedLimit}
+              ''')
     time.sleep(1)
